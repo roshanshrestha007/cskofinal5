@@ -59,7 +59,8 @@ app.use((req, res, next) => {
   var sessionOut = (req, res, next) => {
     if (req.session.user == undefined && req.cookies.user_sid == undefined ) {
         console.log("session out:",req.session.user);
-
+        
+        
       res.redirect(`/login`);
     } else {
       next();
@@ -467,7 +468,6 @@ router.route('/:userID')
 
             }
             else{
-                req.flash('message', 'Some error occured')
                 res.redirect(`/${uidz}`);
             }
 
