@@ -11,44 +11,30 @@ ask where should signup page redirect when new user is added. RN it redirects to
 const express = require('express');
 const app = express();
 var cookieParser = require("cookie-parser");
-
-const uuid = require('uuid');
-const session = require('express-session');
+const uuid = require('uuid'); //for uniquie user ids
 app.use(cookieParser());
 
-
-app.use(session({
-    key: "user_sid",
-    secret: 'some secret',
-    cookie: {maxAge : 30000},
-    resave: false,
-    saveUninitialized: false
-}))
-
-
-
-const { default: Conf } = require('conf');
+const { default: Conf } = require('conf'); //Used to store user details, never do it in real world applications. Use DB instead
 
 const store = new Conf();
 
 
-//store.clear();
+//store.clear();  // To clear storage incase of garbage values
 
 const router = new express.Router();
-//const loggedInStatus = True;
 
-
+//clear cookie if no user session.
 app.use((req, res, next) => {
-    if (req.cookies.user_sid && !req.session.user) {
+    if (req.cookies.user_sid && !req.session.sessionID) {
       res.clearCookie("user_sid");
     }
     next();
   });
 
+  //middleware function to check session, redirects to account
   var sessionChecker = (req, res, next) => {
-    if (req.session.user && req.cookies.user_sid) {
-        uids = req.session.user;
-        console.log("sessionCheckeer",uids);
+    if (req.session.sessionID && req.cookies.user_sid) {
+        uids = req.session.sessionID;
 
       res.redirect(`/${uids}`);
     } else {
@@ -56,9 +42,10 @@ app.use((req, res, next) => {
     }
   };
 
+  //middleware function to check session, redirects to login
   var sessionOut = (req, res, next) => {
-    if (req.session.user == undefined && req.cookies.user_sid == undefined ) {
-        console.log("session out:",req.session.user);
+    if (req.session.sessionID == undefined && req.cookies.user_sid == undefined ) {
+        console.log("session out:",req.session.sessionID);
         
         
       res.redirect(`/login`);
@@ -68,7 +55,7 @@ app.use((req, res, next) => {
   };
 
 
-
+//routes for login page
 router.route('/login')
     .get(sessionChecker, (req, res) => {
         var data = JSON.parse(store.get('userArray') || '[]');
@@ -88,7 +75,7 @@ router.route('/login')
             // res.redirect()
         }
         else {
-            const sessionid = req.session.user;
+            const sessionid = req.session.sessionID;
             console.log("Zoro login",sessionid);
 
 
@@ -149,8 +136,8 @@ router.route('/login')
 
         if (flg == '1') {
             console.log("inside flag 1");
-            req.session.user = uids;
-            sessionidhere = req.session.user;
+            req.session.sessionID = uids;
+            sessionidhere = req.session.sessionID;
             console.log("boro ",sessionidhere);
             res.redirect(`/${uids}`);
         }
@@ -166,41 +153,16 @@ router.route('/login')
 
     })
 
+
+//routes for sign up page
 router.route('/new')
     .get(sessionOut, (req, res) => {
 
-        console.log("new out:",req.session.user);
-        // console.log("new cookie out:",req.cookie.user_sid);
+        res.render('new',{logged: '1'}); //"logged" variable is used in header handlebars
 
-
-
-        res.render('new',{logged: '1'});
-
-
-
-        // if(req.session.startid){
-        //     res.render('new', { logged: '1' });
-        // }
-        // else{
-            // res.redirect('/login')
-       // }
-        // var data = JSON.parse(store.get('userArray') || '[]');
-        // if(data === '[]'){
-        //     res.redirect('login',{notlogged:'1'});
-        // }
-        // else{
-        //     const ind = store.get('index');
-        //     const username = data[ind].uname;
-
-        // res.render('new',{logged:'1', userName: username});
-        // }
-        // res.render('new', { notlogged: '1' });
 
     })
     .post((req, res) => {
-        //console.log(req.body); 
-
-
 
         const uniqId = uuid.v1();
         const username = req.body.uname;
@@ -218,8 +180,6 @@ router.route('/new')
             console.log("loop  " + i)
             if ((username === Signupdata[i].username)) {
                 console.log("username taken");
-                // store.set('index',i);
-                // console.log(store.get('index'));
                 var flgSign = '1';
                 break;
             }
@@ -227,7 +187,6 @@ router.route('/new')
                 console.log("email taken");
                 var flgSign = '2';
                 break;
-
             }
             else {
                 console.log("The else statement")
@@ -262,8 +221,6 @@ router.route('/new')
                 }, notlogged: '1'
             })
 
-
-
         }
         else {
             var newUser = JSON.parse(store.get('userArray') || '[]');
@@ -279,7 +236,6 @@ router.route('/new')
             store.set('userArray', JSON.stringify(newUser));
 
             const allUser = JSON.parse(store.get('userArray' || '[]'));
-            //store.clear();
             console.log(allUser);
             console.log(allUser.length);
             const i = allUser.length - 1;
@@ -288,18 +244,13 @@ router.route('/new')
             console.log(allUser[0].email);
             var useruID = allUser[i].uniqId
 
-            req.session.user = useruID;
-
-
-
-
-
+            req.session.sessionID = useruID;  // user's unique id as session id
             res.redirect(`/${useruID}`);
 
         }
     })
 
-
+//routes of logout
 router.route('/logout')
     .get((req,res)=>{
         res.clearCookie("user_sid");
@@ -346,12 +297,12 @@ router.route('/:userID')
 
         }
         console.log("userFlag:",UseFlg);
-        console.log("session id is:",req.session.user);
+        console.log("session id is:",req.session.sessionID);
         console.log("user id is:",userids);
         console.log("cookeie is:", req.cookies.user_sid);
         
 
-        var sess = req.session.user;
+        var sess = req.session.sessionID;
         console.log("session var id is:",sess);
 
 
@@ -462,7 +413,7 @@ router.route('/:userID')
 
             req.flash('message', 'User Successfully updated!')
 
-            req.session.user = upduuid;
+            req.session.sessionID = upduuid;
             res.redirect(`/${upduuid}`);
             console.log("user after", updUserName);
 
