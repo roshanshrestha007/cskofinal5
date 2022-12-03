@@ -1,0 +1,54 @@
+
+<div className="container mb-5">
+            <div className="box justify-content-center">
+                <h1 class="display-4 page-header">Sign Up</h1>
+                <br>
+                <form method="POST" className="was-validated">
+                <div class="mt-2">
+                    <label for="uname" class="form-label">Username:</label>
+                    <input type="text" class="form-control" id="uname" placeholder="Enter username"
+                        name="uname" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback fs-9">Please fill out this field.</div>
+                </div>
+                <div class="mb-1 mt-1">
+                    <label for="email" class="form-label ">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="mb-1">
+                    <label for="psw1" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="psw1" placeholder="Enter password" name="psw1"
+                        required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="mb-1">
+                    <label for="psw2" class="form-label">Re-enter Password:</label>
+                    <input type="password" class="form-control" id="psw2" placeholder="Re-enter password" name="psw2"
+                        required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="mb-1">
+                    <label for="phoneno" class="form-label">Phone no.:</label>
+                    <input type="number" class="form-control" id="pwd" placeholder="Enter phone number" name="phoneno"
+                        required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <button type="submit" class="btn btn-primary" >Sign Up</button>
+                
+            </form>
+          {{#if message}}
+        <div class="alert alert-{{message.type}}" role="alert">
+            <h4 class="alert-heading">{{message.title}}</h4>
+        </div>
+        {{/if}}
+
+            
+
+            
+            </div>
+        </div>
