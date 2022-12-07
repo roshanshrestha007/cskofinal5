@@ -7,6 +7,9 @@ var cookieParser = require("cookie-parser");
 const app = express();
 const session = require('express-session')
 const flush = require('connect-flash')
+
+const port = 3500;
+
 app.use(cookieParser());
 
 
@@ -16,7 +19,7 @@ app.use(bodyParser.json())
 app.use(session({
     key: "user_sid",
     secret: 'some secret',
-    cookie: { maxAge: 3600000 }, // Time for cookie to expire in milliseconds 3600000 ms = 60 minutes
+    cookie: { maxAge: 5400000 }, // Time for cookie to expire in milliseconds 5400000 ms = 90 minutes
     resave: false,
     saveUninitialized: false
 }))
@@ -48,6 +51,6 @@ app.use('/', (req, res) => {
 })
 
 
-app.listen(3500, () => {
-    console.log('port working');
+app.listen(port, () => {
+    console.log('Port working at:', port);
 })

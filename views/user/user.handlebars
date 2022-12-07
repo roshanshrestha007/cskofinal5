@@ -1,68 +1,113 @@
 {{#if message}}
-        <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">{{{message}}}</h4>
-        </div>
-        {{/if}}
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">{{{message}}}</h4>
+</div>
+{{/if}}
 
-        {{#if failumessage}}
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">{{{failumessage}}}</h4>
-        </div>
-        {{/if}}
+{{#if failmessage}}
+<div class="alert alert-danger">
+  <h4 class="alert-heading">{{{failmessage}}}</h4>
+</div>
+{{/if}}
 
 
-        {{#if failemessage}}
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">{{{failemessage}}}</h4>
-        </div>
-        {{/if}}
 
-            <div class="container">
-            <div class="box justify-content-center">
-            <h1 class="display-4 page-header">Update Information</h1>
-            <br>
 
-            <form method = "POST" class="was-validated">
+{{#if diffuser}}
 
-              <div class="mb-3 mt-3">
-                  <label for="exampleInputEmail1">UniqueID:</label>
-                  <input type="text" class="form-control" id="uniqid" value={{userID}} aria-describedby="emailHelp" name = "upduuid" readonly>
-                 
-    
-                </div>
-                <div class="mb-3 mt-3">
-                  <label for="exampleInputEmail1">Username:</label>
-                  <input type="text" class="form-control" id="username" value={{userName}} aria-describedby="emailHelp" name = "upduname" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1">Email:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" value={{email}} aria-describedby="emailHelp" name = "updemail" required>
-                    <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                  </div>
-                  <div class="mb-1">
-                    <label for="psw1" class="form-label">Password:</label>
-                    <input type="text" class="form-control" id="psw1" value={{password}} name="psw1"
-                        readonly>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                  <div class="mb-3">
-                    <label for="phoneNo">Phone no.:</label>
-                    <input type="number" class="form-control" id="phoneNo" value={{phno}} placeholder="Enter phone number" name = "updphno" required>
-                    <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                  </div>
-                  <br>
-                <button type="submit" class="btn btn-primary">Update</button>
-              </form>
- {{#if mesg}}
-        <div class="alert alert-{{mesg.type}}" role="alert">
-            <h4 class="alert-heading">{{mesg.title}}</h4>
-        </div>
-        {{/if}}
+<div class="container">
+  <div class="box justify-content-center">
+    <h1 class="display-4 page-header">Update Information</h1>
+    <br>
 
-        </div>
-        </div>
+    <form method="POST" class="was-validated">
+
+      <div class="mb-3 mt-3">
+        <label for="exampleInputEmail1">UniqueID:</label>
+        <input type="text" class="form-control" id="uniqid" value={{userID}} aria-describedby="emailHelp" name="upduuid"
+          readonly>
+
+
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="exampleInputEmail1">Username:</label>
+        <input type="text" class="form-control" id="username" value={{userName}} aria-describedby="emailHelp"
+          name="upduname" readonly>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1">Email:</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" value={{email}} aria-describedby="emailHelp"
+          name="updemail" readonly>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      <div class="mb-3">
+        <label for="phoneNo">Phone no.:</label>
+        <input type="number" class="form-control" id="phoneNo" value={{phno}} placeholder="Enter phone number"
+          name="updphno" readonly>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+    {{#if mesg}}
+    <div class="alert alert-{{mesg.type}}" role="alert">
+      <h4 class="alert-heading">{{mesg.title}}</h4>
+    </div>
+    {{/if}}
+
+  </div>
+</div>
+
+{{/if}}
+{{#if sameuser}}
+<div class="container">
+  <div class="box justify-content-center">
+    <h1 class="display-4 page-header">Update Information</h1>
+    <br>
+
+    <form method="POST" class="was-validated">
+
+      <div class="mb-3 mt-3">
+        <label for="exampleInputEmail1">UniqueID:</label>
+        <input type="text" class="form-control" id="uniqid" value={{userID}} aria-describedby="emailHelp" name="upduuid"
+          readonly>
+
+
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="exampleInputEmail1">Username:</label>
+        <input type="text" class="form-control" id="username" value={{userName}} aria-describedby="emailHelp"
+          name="upduname" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1">Email:</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" value={{email}} aria-describedby="emailHelp"
+          name="updemail" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      <div class="mb-3">
+        <label for="phoneNo">Phone no.:</label>
+        <input type="number" class="form-control" id="phoneNo" value={{phno}} placeholder="Enter phone number"
+          name="updphno" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+    {{#if mesg}}
+    <div class="alert alert-{{mesg.type}}" role="alert">
+      <h4 class="alert-heading">{{mesg.title}}</h4>
+    </div>
+    {{/if}}
+
+  </div>
+</div>
+{{/if}}

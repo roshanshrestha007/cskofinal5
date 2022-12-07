@@ -1,29 +1,29 @@
-  <div className="container mb-5">
-            <div className="box justify-content-center">
-                <h1 class="display-4 page-header">Log In</h1>
-                <br>
-  
-  
-    <form method="POST" class="was-validated">
-                <div class="mb-3 mt-3">
-                  <label for="uname" class="form-label">Username:</label>
-                  <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="mb-3">
-                  <label for="pwd" class="form-label">Password:</label>
-                  <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-              <button type="submit" class="btn btn-primary">Sign In</button>
-              </form>
-              </div>
+<div class="container">
+  <div class="box justify-content-center">
+    <h1 class="display-4 page-header">Log In</h1>
+    <br>
 
-              {{#if message}}
-        <div class="alert alert-{{message.type}}" role="alert">
-            <h4 class="alert-heading">{{message.title}}</h4>
-        </div>
-        {{/if}}
+
+    <form method="POST" class="was-validated">
+      <div class="mb-3 mt-3">
+        <label for="uname" class="form-label">Username:</label>
+        <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      <div class="mb-3">
+        <label for="pwd" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign In</button>
+    </form>
   </div>
+
+  {{#if message}}
+  <div class="alert alert-{{message.type}}" role="alert">
+    <h4 class="alert-heading">{{message.title}}</h4>
+  </div>
+  {{/if}}
+</div>
