@@ -284,11 +284,6 @@ router.route('/:userID')
         }
 
 
-        // console.log("userFlag:",UseFlg);
-        // console.log("session id is:",req.session.sessionID);
-        // console.log("user id is:",userids);
-        // console.log("cookeie is:", req.cookies.user_sid);
-
 
         var sess = req.session.sessionID;
         // console.log("session var id is:",sess);
@@ -322,7 +317,7 @@ router.route('/:userID')
             const uName = data[ind].username;
 
             res.render('user', {
-                diffuser: '1', userID: uniqid, userName: uName, email: DisEmail, phno: DisPhno, password: DisPwd, message: req.flash('message'), failumessage: req.flash('failumessage'), failemessage: req.flash('failemessage')
+                diffuser: '1', userID: uniqid, userName: uName, email: DisEmail, phno: DisPhno, password: DisPwd, message: req.flash('message'), failmessage: req.flash('failmessage')
             });
 
         }
