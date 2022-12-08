@@ -269,6 +269,8 @@ router.route('/:userID')
 
         var data = JSON.parse(store.get('userArray') || '[]');
 
+
+        //Search for matching user id and Assign i to index
         for (let i = 0; i < data.length; i++) {
             if (userids === data[i].uniqId) {
                 store.set('index', i);
@@ -285,13 +287,13 @@ router.route('/:userID')
 
 
 
-        var sess = req.session.sessionID;
+        var sess = req.session.sessionID;   //assign session id
         // console.log("session var id is:",sess);
 
 
 
 
-
+        //user matches and session id matches and cookie created
         if (UseFlg == '1' && sess == userids && req.cookies.user_sid) {
             const ind = store.get('index');
             const uniqid = data[ind].uniqId;
@@ -306,6 +308,7 @@ router.route('/:userID')
             });
 
         }
+        //user matches but session id doesn't match (different user data)
         else if (UseFlg == '1' && sess !== userids && req.cookies.user_sid) {
             const ind = store.get('index');
             const uniqid = data[ind].uniqId;
